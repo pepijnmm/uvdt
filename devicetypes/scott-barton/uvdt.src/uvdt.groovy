@@ -4,6 +4,9 @@
 
         Modded by Scott Barton to add Smoke, Water, Sound
         Lines between the //SB and //END SB are the lines I added/modified
+        
+        Rescued back into GitHub by CultusMechanicus 1/4/18
+        (does that count as 'distribution' for the license below? Meh...)
     
     1.0.5.  2016-08-29  added sensor and actuator capabilities per Alex
     1.0.4	2016-05-21	added LUX capability
@@ -377,6 +380,7 @@ def localOn() {
 	if (device.currentValue("UVDT") != "on"){
     	log.info "on request: OK"
 		sendEvent(name: "UVDT", value: "on" ,displayed: false)
+        sendEvent(name: "switch", value: "on" ,displayed: false)
     	syncDevices("1")
         if (autoOff) runIn(autoOff.toInteger(),localOff)
     } else {
@@ -388,6 +392,7 @@ def localOff() {
 	if (device.currentValue("UVDT") != "off"){
     	log.info "off request: OK"
 		sendEvent(name: "UVDT", value: "off" ,displayed: false)
+        sendEvent(name: "switch", value: "off" ,displayed: false)
     	syncDevices("0")
     } else {
     	log.info "off request: duplicate, ignored"
